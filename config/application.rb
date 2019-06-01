@@ -25,7 +25,7 @@ module RailsExam02AddFeature
     config.generators do |g|
       g.assets false
       g.helper false
-      g.test_framework false
+      g.test false
     end
   end
 end
