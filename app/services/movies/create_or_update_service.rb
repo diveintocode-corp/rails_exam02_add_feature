@@ -12,7 +12,6 @@ module Movies
     end
 
     def run
-      build_associate
       return false if !validate
 
       build_associate
