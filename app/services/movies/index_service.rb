@@ -1,8 +1,6 @@
 module Movies
   class IndexService < Movies::BaseService
 
-    include BaseServiceImpl
-
     concerning :MovieBuilder do
       def movies
         @movies ||= Movie.all

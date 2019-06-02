@@ -2,8 +2,6 @@
 module Movies
   class DestroyService < Movies::BaseService
 
-    include BaseServiceImpl
-
     concerning :MovieBuilder do
       attr_reader :id
       def movie

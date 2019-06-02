@@ -13,6 +13,3 @@ class TextValidator < ActiveModel::EachValidator
     end
   end
 end
-
-
-text: true

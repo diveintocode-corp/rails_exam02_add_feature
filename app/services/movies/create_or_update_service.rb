@@ -2,8 +2,6 @@
 module Movies
   class CreateOrUpdateService < Movies::BaseService
 
-    include BaseServiceImpl
-
     concerning :MovieBuilder do
       attr_reader :id
       def movie
@@ -19,16 +17,17 @@ module Movies
 
       build_associate
 
-      if movie.id.nil?
-        movie.save
+      if id.nil?
+        save
       else
-        movie.update(@attr)
+        update(@attr)
       end
     end
 
     private
 
     def save
+
       if movie.save
         return true
       else

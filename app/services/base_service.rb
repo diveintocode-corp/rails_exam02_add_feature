@@ -1,5 +1,5 @@
 
-class BaseServiceModel
+class BaseService
 
   attr_accessor :errors
   attr_accessor :attr
