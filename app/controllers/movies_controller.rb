@@ -1,8 +1,8 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show edit update destroy]
+  before_action :set_movie, only: %i[show edit]
 
   def index
-    @movies = Movie.all
+    @movies = Movies::IndexService.new.movies
   end
 
   def show; end
@@ -14,9 +14,10 @@ class MoviesController < ApplicationController
   def edit; end
 
   def create
-    @movie = Movie.new(movie_params)
-
-    if @movie.save
+    repository = Movies::CreateOrUpdateService.new(movie_params)
+    result = repository.run
+    @movie = repository.movie
+    if result
       redirect_to @movie, notice: 'Movie was successfully created.'
     else
       render :new
@@ -24,16 +25,25 @@ class MoviesController < ApplicationController
   end
 
   def update
-    if @movie.update(movie_params)
-      redirect_to @movie, notice: 'Movie was successfully updated.'
+    repository = Movies::CreateOrUpdateService.new(movie_params)
+    result = repository.run
+    @movie = repository.movie
+    if repository.run
+      redirect_to repository.movie, notice: 'Movie was successfully updated.'
     else
       render :edit
     end
   end
 
   def destroy
-    @movie.destroy
-    redirect_to movies_url, notice: 'Movie was successfully destroyed.'
+    repository = Movies::DestroyService.new(movie_params)
+    result = repository.run
+    @movie = repository.movie
+    if repository.run
+      redirect_to movies_url, notice: 'Movie was successfully destroyed.'
+    else
+      render :show
+    end
   end
 
   private

@@ -27,5 +27,9 @@ module RailsExam02AddFeature
       g.helper false
       g.test false
     end
+
+    config.autoload_paths += Dir["#{config.root}/app/validators/*"]
+    config.autoload_paths += Dir["#{config.root}/app/services/*"]
+
   end
 end
