@@ -1,11 +1,13 @@
+
 module Movies
-  class IndexService < Movies::BaseService
+  class DestroyService < Movies::BaseService
 
     include BaseServiceImpl
 
     concerning :MovieBuilder do
-      def movies
-        @movies ||= Movie.all
+      attr_reader :id
+      def movie
+        @movie ||= Movie.find(id)
       end
     end
 
@@ -15,7 +17,11 @@ module Movies
 
       build_associate
 
-      return movies
+      if movie.destroy
+        true
+      else
+        false
+      end
     end
 
     private
@@ -25,7 +31,7 @@ module Movies
 
     def validate
       @errors = []
-      @errors.push('please check database') unless movies.present?
+      @errors.push('id is required') unless movie.present?
       return @errors.length == 0
     end
   end

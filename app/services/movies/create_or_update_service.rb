@@ -1,10 +1,10 @@
 
 module Movies
-  class MovieCreateOrUpdateService < Movies::BaseService
+  class CreateOrUpdateService < Movies::BaseService
 
     include BaseServiceImpl
 
-    concerning :NewMovieBuilder do
+    concerning :MovieBuilder do
       attr_reader :id
       def movie
         @movie ||= id.nil? ?
