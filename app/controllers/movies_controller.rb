@@ -15,8 +15,8 @@ class MoviesController < ApplicationController
 
   def create
     repository = Movies::CreateOrUpdateService.new(movie_params)
-    result = repository.run
     @movie = repository.movie
+    result = repository.run
     if result
       redirect_to @movie, notice: 'Movie was successfully created.'
     else
@@ -26,9 +26,9 @@ class MoviesController < ApplicationController
 
   def update
     repository = Movies::CreateOrUpdateService.new(movie_params)
-    result = repository.run
     @movie = repository.movie
-    if repository.run
+    result = repository.run
+    if result
       redirect_to repository.movie, notice: 'Movie was successfully updated.'
     else
       render :edit
@@ -37,9 +37,9 @@ class MoviesController < ApplicationController
 
   def destroy
     repository = Movies::DestroyService.new(movie_params)
-    result = repository.run
     @movie = repository.movie
-    if repository.run
+    result = repository.run
+    if result
       redirect_to movies_url, notice: 'Movie was successfully destroyed.'
     else
       render :show
