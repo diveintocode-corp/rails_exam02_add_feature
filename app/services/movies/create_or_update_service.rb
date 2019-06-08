@@ -4,9 +4,7 @@ module Movies
     concerning :MovieBuilder do
       attr_reader :id
       def movie
-        @movie ||= id.nil? ?
-          Movie.new(@attr) :
-          Movie.find(id)
+        @movie ||= id.nil? ? Movie.new(@attr) : Movie.find(id)
       end
     end
 
