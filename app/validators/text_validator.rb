@@ -9,7 +9,7 @@ class TextValidator < ActiveModel::EachValidator
   end
 
   def validate_each(record, attribute, value)
-    if !(value.class == "".class)
+    if value.class != "".class
       record.errors.add(attribute, " must not be empty")
     else
       record.errors.add(attribute, " must be more 1 of characters") unless value.length > TextValidator.min_length
