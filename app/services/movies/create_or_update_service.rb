@@ -1,18 +1,15 @@
-
 module Movies
   class CreateOrUpdateService < Movies::BaseService
 
     concerning :MovieBuilder do
       attr_reader :id
       def movie
-        @movie ||= id.nil? ?
-          Movie.new(@attr) :
-          Movie.find(id)
+        @movie ||= id.nil? ? Movie.new(@attr) : Movie.find(id)
       end
     end
 
     def run
-      return false if !validate
+      return false unless validate
 
       build_associate
 
@@ -26,7 +23,6 @@ module Movies
     private
 
     def save
-
       if movie.save
         return true
       else
@@ -44,13 +40,12 @@ module Movies
       end
     end
 
-    def build_associate
-    end
+    def build_associate; end
 
     def validate
       @errors = []
-      @errors.push('please params') unless movie.present?
-      return @errors.length == 0
+      @errors.push('please params') if movie.blank?
+      return @errors.empty?
     end
   end
 end

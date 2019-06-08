@@ -1,4 +1,3 @@
-
 class BaseService
 
   attr_accessor :errors
@@ -22,16 +21,15 @@ class BaseService
 end
 
 module BaseServiceImpl
+  def run
+    raise NotImplementedError
+  end
 
- def run
-   raise NotImplementedError
- end
+  def build_associate
+    raise NotImplementedError
+  end
 
- def build_associate
-   raise NotImplementedError
- end
-
- def validate
-   raise NotImplementedError
- end
+  def validate
+    raise NotImplementedError
+  end
 end

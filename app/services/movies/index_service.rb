@@ -9,7 +9,7 @@ module Movies
 
     def run
       build_associate
-      return false if !validate
+      return false unless validate
 
       build_associate
 
@@ -18,13 +18,12 @@ module Movies
 
     private
 
-    def build_associate
-    end
+    def build_associate; end
 
     def validate
       @errors = []
-      @errors.push('please check database') unless movies.present?
-      return @errors.length == 0
+      @errors.push('please check database') if movies.blank?
+      return @errors.empty?
     end
   end
 end
